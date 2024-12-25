@@ -1,14 +1,16 @@
 import 'dotenv/config'
 
-import {Pool} from 'pg'
+import pg from "pg"
+const { Pool } = pg
 
-const pool = new Pool({
+export const db = new Pool({
   user: process.env.PG_USER,
   password: process.env.PG_PASSWORD,
-  port: 5433,
-  host: process.env.HOST
+  port: 5432,
+  host: process.env.HOST,
+  database: process.env.PG_DATABASE
 })
 
-const client = await pool.connect()
+// const client = await db.connect()
 
-client.release()
+// client.release()
