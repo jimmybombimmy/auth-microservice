@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "setup-dbs": "psql -c ./setup.sql",
+    "seed": "node ./dist/database/seed/run-seed.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "tsc -w"
   },
@@ -17,11 +18,13 @@
     "express": "^4.21.2",
     "passport-local": "^1.0.0",
     "pg": "^8.13.1",
+    "pg-format": "^1.0.4",
     "pgtools": "^1.0.1"
   },
   "devDependencies": {
     "@types/express": "^5.0.0",
     "@types/pg": "^8.11.10",
+    "@types/pg-format": "^1.0.5",
     "typescript": "^5.7.2"
   }
 }
