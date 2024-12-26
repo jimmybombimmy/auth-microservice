@@ -1,9 +1,9 @@
 import format from 'pg-format'
 import { db } from "../db.js"
 import { UserDataInterface } from '../../types.js'
-import { users } from '../data/test-data/users.js'
 
 const seed = (userData: UserDataInterface[]) => {
+
   return db
     .query(`DROP TABLE IF EXISTS users`)
     .then(async () => {
@@ -11,6 +11,8 @@ const seed = (userData: UserDataInterface[]) => {
         id VARCHAR PRIMARY KEY,
         username VARCHAR NOT NULL,
         email VARCHAR NOT NULL,
+        created TIMESTAMP NOT NULL,
+        amended TIMESTAMP NOT NULL,
         hash VARCHAR NOT NULL,
         salt VARCHAR NOT NULL,
         admin BOOLEAN,
@@ -18,7 +20,7 @@ const seed = (userData: UserDataInterface[]) => {
       )`)
     })
     .then(() => {
-      const usersDataToArr =  users.map(u => {
+      const usersDataToArr =  userData.map(u => {
         const values = []
         for (let key in u) {
           const val = u[key as keyof UserDataInterface];
@@ -26,9 +28,9 @@ const seed = (userData: UserDataInterface[]) => {
         }
         return values
       })
-      
+
       const usersInsert = format(
-        `INSERT INTO users (id, username, email, hash, salt, admin, __v) VALUES %L RETURNING *`,
+        `INSERT INTO users (id, username, email, created, amended, hash, salt, admin, __v) VALUES %L RETURNING *`,
         usersDataToArr
       )
 

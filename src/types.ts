@@ -2,6 +2,8 @@ export interface UserDataInterface {
   _id: string;
   username: string;
   email: string;
+  created: string;
+  amended: string;
   hash: string;
   salt: string;
   admin: boolean;
