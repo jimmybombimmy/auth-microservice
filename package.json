@@ -14,15 +14,17 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "crypto": "^1.0.1",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
+    "passport": "^0.7.0",
     "passport-local": "^1.0.0",
     "pg": "^8.13.1",
-    "pg-format": "^1.0.4",
-    "pgtools": "^1.0.1"
+    "pg-format": "^1.0.4"
   },
   "devDependencies": {
     "@types/express": "^5.0.0",
+    "@types/passport-local": "^1.0.38",
     "@types/pg": "^8.11.10",
     "@types/pg-format": "^1.0.5",
     "typescript": "^5.7.2"
