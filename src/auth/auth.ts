@@ -4,16 +4,14 @@ import { UserDataInterface } from "../types.js";
 
 import format from 'pg-format'
 import { db } from "../database/db.js"
-
-// to do:
-// - Look into double buffering in the psql db
-// - understand whether db.query<UserDataInterface>(query) is being used correctly here
+import passport from "passport";
 
 export const strategy: Strategy = new LocalStrategy(async function verify(username, password, done) {
 
   try {
     const query = format('SELECT * FROM users WHERE username = %L', username);
     const result = await db.query<UserDataInterface>(query);
+    console.log(result)
 
     if (result.rows.length === 0) {
       return done(null, false, { message: 'Incorrect username or password.' });
@@ -39,4 +37,32 @@ export const strategy: Strategy = new LocalStrategy(async function verify(userna
     return done(err);
   }
 
+})
+
+passport.use(strategy)
+
+passport.serializeUser((user: any, done) => {
+  return done(null, user.id)
+})
+
+passport.deserializeUser(async (userId, done) => {
+  
+  await db.query(format(`SELECT * FROM users WHERE username = %L;`, "goku123")) 
+  .then(({rows}) => {
+    if (rows[0]) {
+      done(null, rows[0])
+    } else {
+      done(new Error("No user -- change this error in deserialise user"))
+    }
+
+  })
+  
+
+  // User.findById(userId)
+  //   .then((user) => {
+  //     done(null, user)
+  //   })
+  //   .catch((err) => {
+  //     done(err)
+  //   })
 })
