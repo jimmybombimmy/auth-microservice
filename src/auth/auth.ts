@@ -2,8 +2,8 @@ import { Strategy as LocalStrategy, Strategy } from "passport-local";
 import crypto from "crypto"
 import { UserDataInterface } from "../types.js";
 
-import format from 'pg-format'
 import { db } from "../database/db.js"
+import format from 'pg-format'
 import passport from "passport";
 
 export const strategy: Strategy = new LocalStrategy(async function verify(username, password, done) {
@@ -54,15 +54,5 @@ passport.deserializeUser(async (userId, done) => {
     } else {
       done(new Error("No user -- change this error in deserialise user"))
     }
-
   })
-  
-
-  // User.findById(userId)
-  //   .then((user) => {
-  //     done(null, user)
-  //   })
-  //   .catch((err) => {
-  //     done(err)
-  //   })
 })

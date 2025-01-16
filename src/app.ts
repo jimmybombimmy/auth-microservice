@@ -3,15 +3,26 @@ const PORT = process.env.PORT
 
 import passport from 'passport';
 import express from 'express'
+import session from './auth/session.js';
 import { strategy } from './auth/auth.js';
-import { UserDataInterface } from './types.js';
+import './auth/auth.js'
 
-import { db } from './database/db.js';
-import format from 'pg-format';
 
 const app: express.Express = express();
 
-app.use(passport.authenticate('session'));
+app.use(session)
+app.use(passport.initialize())
+app.use(passport.session())
+
+export let sessionInfo: any;
+export let passportInfo: object | undefined
+
+app.use((req, res, next) => {
+  sessionInfo = req.session
+  console.log("shinfo", sessionInfo)
+  passportInfo = req.user
+  next()
+})
 
 app.get("/ping", (req, res) => {
   res.send("pinged")
@@ -33,16 +44,3 @@ app.post('/login', passport.authenticate('local', {
 app.listen(PORT, () => {
   console.log(`Auth Microservice listening on port ${PORT}`)
 })
-
-
-// const router = express.Router()
-
-// router.get("/", function(req, res) {
-//   res.render("yes")
-// })
-
-// router.post('/login', 
-//   passport.authenticate('local', { failureRedirect: '/login' }),
-//   function(req, res) {
-//     res.redirect('/');
-//   });
