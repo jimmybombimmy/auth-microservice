@@ -5,7 +5,7 @@ import { UserDataInterface } from "../../../types.js"
 export const users: UserDataInterface[] = [
   {
     _id: "655b50b42e2bcd090b435230",
-    username: "goku123",
+    username: "Goku123",
     email: "goku@kamehouse.com",
     created: "2024-12-26T10:15:22.406Z",
     amended: "2024-12-26T10:15:22.406Z",

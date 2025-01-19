@@ -131,3 +131,6 @@ dist
 
 # MAC only
 .DS_Store
+
+# Todo lists
+todo.md

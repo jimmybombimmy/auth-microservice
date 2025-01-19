@@ -1,20 +1,20 @@
-import { Strategy as LocalStrategy, Strategy } from "passport-local";
+import { Strategy as LocalStrategy } from "passport-local";
 import crypto from "crypto"
-import { UserDataInterface } from "../types.js";
 
 import { db } from "../database/db.js"
 import format from 'pg-format'
 import passport from "passport";
 
-export const strategy: Strategy = new LocalStrategy(async function verify(username, password, done) {
+const customFields = {
+  usernameField: 'username',
+  passwordField: 'password',
+}
 
+const verifyCallback = async (username: string, password: string, done: Function) => {
   try {
-    const query = format('SELECT * FROM users WHERE username = %L', username);
-    const result = await db.query<UserDataInterface>(query);
-    console.log(result)
-
+    const result = await db.query("SELECT * FROM users WHERE username = $1", [username.toLowerCase()])
     if (result.rows.length === 0) {
-      return done(null, false, { message: 'Incorrect username or password.' });
+      return done(null, false);
     }
 
     const user = result.rows[0];
@@ -27,7 +27,7 @@ export const strategy: Strategy = new LocalStrategy(async function verify(userna
       }
 
       if (!crypto.timingSafeEqual(userHashBuffer, hashedPassword)) {
-        return done(null, false, { message: 'Incorrect username or password.' });
+        return done(null, false);
       }
 
       return done(null, user);
@@ -36,8 +36,9 @@ export const strategy: Strategy = new LocalStrategy(async function verify(userna
   } catch (err) {
     return done(err);
   }
+}
 
-})
+const strategy = new LocalStrategy(customFields, verifyCallback)
 
 passport.use(strategy)
 
@@ -46,8 +47,7 @@ passport.serializeUser((user: any, done) => {
 })
 
 passport.deserializeUser(async (userId, done) => {
-  
-  await db.query(format(`SELECT * FROM users WHERE username = %L;`, "goku123")) 
+  await db.query(format(`SELECT * FROM users WHERE username = %L`, "goku123")) 
   .then(({rows}) => {
     if (rows[0]) {
       done(null, rows[0])
