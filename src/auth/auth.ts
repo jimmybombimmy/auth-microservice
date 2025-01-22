@@ -24,7 +24,7 @@ const verifyCallback = async (username: string, password: string, done: Function
     } else {
       return done(null, false)
     }
-    
+
   } catch (err) {
     return done(err);
   }
@@ -38,8 +38,8 @@ passport.serializeUser((user: any, done) => {
   return done(null, user.id)
 })
 
-passport.deserializeUser(async (userId, done) => {
-  await db.query(format(`SELECT * FROM users WHERE username = %L`, "goku123"))
+passport.deserializeUser(async (userId: any, done) => {
+  await db.query(`SELECT * FROM users WHERE id = $1`, [userId])
     .then(({ rows }) => {
       if (rows[0]) {
         done(null, rows[0])
