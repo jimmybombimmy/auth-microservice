@@ -4,6 +4,7 @@ import crypto from "crypto"
 import { db } from "../database/db.js"
 import format from 'pg-format'
 import passport from "passport";
+import { validPassword } from "./utils/passwordUtils.js";
 
 const customFields = {
   usernameField: 'username',
@@ -18,21 +19,12 @@ const verifyCallback = async (username: string, password: string, done: Function
     }
 
     const user = result.rows[0];
-    const userHashBuffer = Buffer.from(user.hash, 'hex');
-
-
-    crypto.pbkdf2(password, user.salt, 310000, 32, 'sha256', (err, hashedPassword) => {
-      if (err) {
-        return done(err);
-      }
-
-      if (!crypto.timingSafeEqual(userHashBuffer, hashedPassword)) {
-        return done(null, false);
-      }
-
-      return done(null, user);
-
-    })
+    if (validPassword(password, user.hash, user.salt)) {
+      return done(null, user)
+    } else {
+      return done(null, false)
+    }
+    
   } catch (err) {
     return done(err);
   }
@@ -47,12 +39,12 @@ passport.serializeUser((user: any, done) => {
 })
 
 passport.deserializeUser(async (userId, done) => {
-  await db.query(format(`SELECT * FROM users WHERE username = %L`, "goku123")) 
-  .then(({rows}) => {
-    if (rows[0]) {
-      done(null, rows[0])
-    } else {
-      done(new Error("No user -- change this error in deserialise user"))
-    }
-  })
+  await db.query(format(`SELECT * FROM users WHERE username = %L`, "goku123"))
+    .then(({ rows }) => {
+      if (rows[0]) {
+        done(null, rows[0])
+      } else {
+        done(new Error("No user -- change this error in deserialise user"))
+      }
+    })
 })
