@@ -1,18 +1,16 @@
 import 'dotenv/config'
-const PORT = process.env.PORT
 
 import passport from 'passport';
 import express from 'express'
-import session from './auth/session.js';
-import './auth/auth.js'
+import session from './auth/session';
+import './auth/auth'
+
+import { db } from './database/db';
+// const client = await db.connect()
+// client.release()
 
 
-import { db } from './database/db.js';
-
-const client = await db.connect()
-client.release()
-
-const app: express.Express = express();
+export const app: express.Express = express();
 
 app.use(express.json())
 app.use(session)
@@ -29,7 +27,7 @@ app.use((req, res, next) => {
 })
 
 app.get("/ping", (req, res) => {
-  res.send("pinged")
+  res.status(200).send({message: "pinged"})
 })
 
 app.get('/', (req, res) => {
@@ -40,7 +38,7 @@ app.get("/no", (req, res) => {
   res.send("Hell No World")
 })
 
-app.post('/login', async  (req, res, next) => {
+app.post('/login', async (req, res, next) => {
   await passport.authenticate('local', (err: object, user: object) => {
     if (!user) {
       res.redirect('/no')
@@ -57,6 +55,12 @@ app.post('/login', async  (req, res, next) => {
 }
 )
 
-app.listen(PORT, () => {
-  console.log(`Auth Microservice listening on port ${PORT}`)
-})
+const PORT = process.env.PORT
+if (process.env.NODE_ENV !== "test") {
+  app.listen(PORT, () => {
+    console.log(`Auth Microservice listening on port ${PORT}`)
+  })
+}
+
+// app.use(router)
+

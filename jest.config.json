@@ -1,7 +1,6 @@
-
 {
-  "verbose": true,
-  "coveragePathIgnorePatters": ["/dist/"],
+  "coverageDirectory": "./output/code-coverage/",
+  "coveragePathIgnorePatterns": ["/dist/"],
   "coverageThreshold": {
     "global": {
       "branches": 0,
@@ -10,9 +9,10 @@
       "statements": 0
     }
   },
-  "coverageDirectory": "./output/code-coverage/",
   "displayName": {
-    "name": "hi",
+    "name": "Auth Microservice Testing",
     "color": "blue"
-  }
+  },
+  "preset": "ts-jest",
+  "verbose": true
 }

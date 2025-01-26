@@ -134,3 +134,6 @@ dist
 
 # Todo lists
 todo.md
+
+# Test coverage
+/output**
