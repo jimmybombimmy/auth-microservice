@@ -1,5 +1,4 @@
-describe("fuck", () => {
+describe("", () => {
   test("", () => {
-    
   })
 })
