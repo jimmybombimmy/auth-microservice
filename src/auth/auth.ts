@@ -8,8 +8,8 @@ const customFields = {
   usernameField: 'username',
   passwordField: 'password',
 }
-
-const verifyCallback = async (username: string, password: string, done: Function) => {
+// eslint-disable-next-line -- imported "done"
+const verifyCallback = async (username: string, password: string, done: any) => {
   try {
     const result = await db.query("SELECT * FROM users WHERE username = $1", [username.toLowerCase()])
     if (result.rows.length === 0) {
@@ -32,11 +32,12 @@ const strategy = new LocalStrategy(customFields, verifyCallback)
 
 passport.use(strategy)
 
-passport.serializeUser((user: any, done) => {
-  return done(null, user.id)
+// eslint-disable-next-line -- no alt for user
+passport.serializeUser<null>((user: any, done) => {
+  return done(null, user._id)
 })
 
-passport.deserializeUser(async (userId: any, done) => {
+passport.deserializeUser(async (userId: string, done) => {
   await db.query(`SELECT * FROM users WHERE id = $1`, [userId])
     .then(({ rows }) => {
       if (rows[0]) {
