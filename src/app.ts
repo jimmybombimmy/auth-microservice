@@ -5,7 +5,7 @@ import express from 'express'
 import session from './auth/session';
 import './auth/auth'
 
-import { db } from './database/db';
+// import { db } from './database/db';
 // const client = await db.connect()
 // client.release()
 
@@ -17,7 +17,7 @@ app.use(session)
 app.use(passport.initialize())
 app.use(passport.session())
 
-export let sessionInfo: any;
+export let sessionInfo: object | undefined;
 export let passportInfo: object | undefined
 
 app.use((req, res, next) => {
