@@ -9,6 +9,7 @@ import { db } from './database/db';
 // const client = await db.connect()
 // client.release()
 
+const why = "lint me"
 
 export const app: express.Express = express();
 
