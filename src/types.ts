@@ -1,4 +1,4 @@
-export interface UserDataInterface {
+export type UserDataInterface = {
   _id: string;
   username: string;
   email: string;

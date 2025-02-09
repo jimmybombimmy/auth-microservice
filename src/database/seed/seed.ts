@@ -22,7 +22,7 @@ const seed = (userData: UserDataInterface[]) => {
     .then(() => {
       const usersDataToArr =  userData.map(u => {
         const values = []
-        for (let key in u) {
+        for (const key in u) {
           const val = u[key as keyof UserDataInterface];
           values.push(val)
         }
