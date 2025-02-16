@@ -14,8 +14,3 @@ export function branchNameCheck() {
     console.log(chalk.bgRgb(0, 75, 0).white.bold(successMsg))
   }
 }
-
-
-
-
-
