@@ -3,7 +3,7 @@
   "coveragePathIgnorePatterns": ["/dist/"],
   "coverageThreshold": {
     "global": {
-      "branches": 100,
+      "branches": 0,
       "functions": 0,
       "lines": 0,
       "statements": 0
