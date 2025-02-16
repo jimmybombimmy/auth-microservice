@@ -14,7 +14,8 @@
     "test:coverage": "jest --coverage",
     "lint": "npx eslint",
     "prepare": "husky",
-    "hooks:pre-commit": "node ./hooks/pre-commit.js"
+    "hooks:pre-commit": "node ./hooks/pre-commit.js",
+    "hooks:commit-msg": "node ./hooks/commit-msg.js"
   },
   "keywords": [],
   "author": "",
