@@ -1,6 +1,4 @@
 #!/bin/bash sh
 
-branch="$(git rev-parse --abbrev-ref HEAD)"
 message="$(cat $1)"
-
-echo "$message mhhghghg"
+npm run hooks:commit-msg "$message"
