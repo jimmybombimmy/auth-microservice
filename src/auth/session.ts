@@ -2,7 +2,7 @@ import 'dotenv/config'
 import session from 'express-session'
 
 export default session({
-  secret: process.env.SECRET!,
+  secret: process.env.SESSION_SECRET!,
   resave: false,
   saveUninitialized: true,
   cookie: {
