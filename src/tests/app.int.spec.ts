@@ -1,17 +1,18 @@
-import { app } from "../app"
 import request from "supertest"
+
+import { app } from "../app"
 
 process.env.NODE_ENV = "test"
 
-describe("GET /ping", () => {
+describe("GET /health/heartbeat", () => {
   test("Should return 'pinged'", async () => {
 
     const response = {
-      message: "pinged"
+      message: "In Service"
     }
 
     await request(app)
-      .get("/ping")
+      .get("/api/health/heartbeat")
       .expect(200)
       .then(({body}) => {
         expect(body).toEqual(response)

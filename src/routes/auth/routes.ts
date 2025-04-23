@@ -2,8 +2,6 @@ import express from "express";
 const router = express.Router()
 
 import passport from 'passport';
-// import session from '../auth/session';
-// import '../auth/auth'
 
 router.get('/', (req, res) => {
   res.send("Hello World")
