@@ -29,5 +29,4 @@ export function commitMsgCheck(message) {
     const successMsg = ` - Thank you for including the branch name in your commit. :)`
     console.log(chalk.bgRgb(0, 75, 0).white.bold(successMsg))
   }
-  // const fuck = shell.exec("cat commit-msg-linter.js | node --input-type=commonjs")
 }
