@@ -1,8 +1,8 @@
 import express from "express";
 const router = express.Router()
 
-import authRoutes from './auth/routes.js'
-import healthRoutes from './health/routes.js'
+import authRoutes from './auth/routes'
+import healthRoutes from './health/routes'
 
 router.use('/auth', authRoutes)
 router.use('/health', healthRoutes)

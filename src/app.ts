@@ -1,16 +1,16 @@
 import 'dotenv/config'
-
 import express from 'express'
-import routes from './routes/routes.js'
 import passport from 'passport';
-import session from './auth/session.js';
-import './auth/auth.js' 
+
+import routes from './routes/routes'
+import session from './auth/session';
+import './auth/auth' 
 
 // import { db } from './database/db';
 // const client = await db.connect()
 // client.release()
 
-
+var hi = "hi"
 export const app: express.Express = express();
 
 app.use(express.json())

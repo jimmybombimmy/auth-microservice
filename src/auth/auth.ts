@@ -1,8 +1,8 @@
 import { Strategy as LocalStrategy } from "passport-local";
-
 import passport from "passport";
-import { db } from "../database/db.js"
-import { validPassword } from "./utils/passwordUtils.js";
+
+import { db } from "../database/db"
+import { validPassword } from "./utils/passwordUtils";
 
 const customFields = {
   usernameField: 'username',

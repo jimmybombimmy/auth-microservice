@@ -1,4 +1,4 @@
-import { UserDataInterface } from "../../../types.js"
+import { UserDataInterface } from "../../../types"
 
 // Add password reset later on
 
