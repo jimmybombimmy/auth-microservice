@@ -1,6 +1,6 @@
-import { users } from '../data/test-data/users.js';
-import seed from './seed.js';
-import { db } from '../db.js'
+import { users } from '../data/test-data/users';
+import seed from './seed';
+import { db } from '../db'
 
 const runSeed = () => {
   return seed(users).then(() => db.end());

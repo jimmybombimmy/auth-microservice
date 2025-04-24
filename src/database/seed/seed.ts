@@ -1,6 +1,6 @@
 import format from 'pg-format'
-import { db } from "../db.js"
-import { UserDataInterface } from '../../types.js'
+import { db } from "../db"
+import { UserDataInterface } from '../../types'
 
 const seed = (userData: UserDataInterface[]) => {
 
