@@ -12,8 +12,6 @@ import './auth/auth'
 
 export const app: express.Express = express();
 
-console.log("this is just a test to make sure that the pull request template is working")
-
 app.use(express.json())
 app.use(session)
 app.use(passport.initialize())
