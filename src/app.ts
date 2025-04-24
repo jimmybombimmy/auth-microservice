@@ -12,7 +12,7 @@ import './auth/auth'
 
 export const app: express.Express = express();
 
-console.log("this is just a test to make sure that the pull request template is working")
+console.log("this is just a test the pull request template")
 
 app.use(express.json())
 app.use(session)
