@@ -10,7 +10,6 @@ import './auth/auth'
 // const client = await db.connect()
 // client.release()
 
-var hi = "hi"
 export const app: express.Express = express();
 
 app.use(express.json())

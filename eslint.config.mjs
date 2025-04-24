@@ -15,7 +15,7 @@ export default [
         "error",
         {
           args: "all",
-          argsIgnorePattern: "^_",
+          argsIgnorePattern: "(^_)|(^res$)|(^req$)|(^err$)",
           caughtErrors: "all",
           caughtErrorsIgnorePattern: "^_",
           destructuredArrayIgnorePattern: "^_",
