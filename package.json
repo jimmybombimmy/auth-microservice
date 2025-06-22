@@ -7,6 +7,7 @@
     "setup-dbs": "psql -c ./setup.sql",
     "seed": "node ./dist/database/seed/run-seed.js",
     "dev": "nodemon src/app.ts",
+    "build": "tsc",
     "watch": "tsc --watch",
     "test": "jest",
     "test:int": "jest --testPathPattern='.int.spec'",
