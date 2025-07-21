@@ -10,10 +10,13 @@ COPY package*.json .
 
 RUN npm ci
 
+RUN echo falls
+
 COPY . .
 
 RUN npm run build
 
 EXPOSE 3000
 
-CMD ["sh", "-c", "npm run seed && npm run dev"]
+# Don't run dev in prod - fine for now
+CMD ["npm", "run", "dev"]

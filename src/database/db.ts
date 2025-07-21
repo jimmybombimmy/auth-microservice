@@ -4,13 +4,9 @@ import pg from "pg"
 const { Pool } = pg
 
 export const db = new Pool({
-  user: process.env.PG_USER,
-  password: process.env.PG_PASSWORD,
-  port: 5432,
-  host: process.env.PG_HOST,
-  database: process.env.PG_DATABASE
+  user: process.env.POSTGRES_USER,
+  password: process.env.POSTGRES_PASSWORD,
+  port: parseInt(process.env.POSTGRES_PORT || "5432"),
+  host: process.env.POSTGRES_HOST,
+  database: process.env.POSTGRES_DATABASE
 })
-
-// const client = await db.connect()
-
-// client.release()
