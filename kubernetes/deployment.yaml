@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: auth
+  namespace: btd
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: auth
+      tier: backend
+  template:
+    metadata:
+      labels: 
+        app: auth
+        tier: backend
+    spec: 
+      containers:
+        - name: auth
+          image:  docker.io/library/btd-core-auth:latest
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - configMapRef:
+                name: auth-secret
+          volumeMounts:
+            - mountPath: /var/lib/auth/data
+              name: authdata
+      volumes:
+        - name: authdata
+          persistentVolumeClaim:
+            claimName: auth-volume-claim
+
+

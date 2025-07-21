@@ -7,17 +7,17 @@ const seed = (userData: UserDataInterface[]) => {
   return db
     .query(`DROP TABLE IF EXISTS users`)
     .then(async () => {
-      return await db.query(`CREATE TABLE users (
-        id VARCHAR PRIMARY KEY,
-        username VARCHAR NOT NULL,
-        email VARCHAR NOT NULL,
-        created TIMESTAMP NOT NULL,
-        amended TIMESTAMP NOT NULL,
-        hash VARCHAR NOT NULL,
-        salt VARCHAR NOT NULL,
-        admin BOOLEAN,
-        __v INT DEFAULT 0 
-      )`)
+        return await db.query(`CREATE TABLE users (
+          id VARCHAR PRIMARY KEY,
+          username VARCHAR NOT NULL,
+          email VARCHAR NOT NULL,
+          created TIMESTAMP NOT NULL,
+          amended TIMESTAMP NOT NULL,
+          hash VARCHAR NOT NULL,
+          salt VARCHAR NOT NULL,
+          admin BOOLEAN,
+          __v INT DEFAULT 0 
+        )`)
     })
     .then(() => {
       const usersDataToArr =  userData.map(u => {
